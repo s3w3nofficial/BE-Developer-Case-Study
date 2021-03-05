@@ -20,6 +20,7 @@ namespace API.Services
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Product>().Property(e => e.Price).HasPrecision(10, 2);
             modelBuilder.ApplyConfiguration(new ProductConfiguration());
         }
 
