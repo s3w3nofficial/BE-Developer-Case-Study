@@ -7,6 +7,8 @@
 
 ## General info
 This project is simple Rest Api Application
+
+swagger is located on: http://localhost:5900/swagger/index.html
 	
 ## Technologies
 Project is created with:
