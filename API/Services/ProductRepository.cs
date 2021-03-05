@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace API.Services
 {
-    public class ProductRepository : IPrroductRepository
+    public class ProductRepository : IProductRepository
     {
         private readonly ApplicationDbContext _db;
         public ProductRepository(ApplicationDbContext db)

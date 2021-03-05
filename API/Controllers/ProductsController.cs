@@ -18,8 +18,8 @@ namespace API.Controllers
     [ApiController]
     public class ProductsController : Controller
     {
-        private readonly IPrroductRepository _productService;
-        public ProductsController(IPrroductRepository productService)
+        private readonly IProductRepository _productService;
+        public ProductsController(IProductRepository productService)
         {
             this._productService = productService;
         }

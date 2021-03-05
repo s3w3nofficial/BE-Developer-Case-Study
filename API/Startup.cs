@@ -47,7 +47,7 @@ namespace API
                 c.IncludeXmlComments(xmlPath);
             });
 
-            services.AddScoped<IPrroductRepository, ProductRepository>();
+            services.AddScoped<IProductRepository, ProductRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

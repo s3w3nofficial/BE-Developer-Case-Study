@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace API.Services
 {
-    public interface IPrroductRepository
+    public interface IProductRepository
     {
         Product GetProduct(int id);
         Task<List<Product>> GetProductsAsync(int pageSize = 10, int pageNumber = 0);
