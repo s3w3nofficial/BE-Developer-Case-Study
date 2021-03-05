@@ -1,0 +1,21 @@
+version: "3.9"
+services:
+  sql-server-db:
+    container_name: sql-server-db
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    environment:
+      SA_PASSWORD: "Heslo1234."
+      ACCEPT_EULA: "Y"
+    ports:
+      - "1433:1433"
+  api:
+    build:
+      context: ./API
+      dockerfile: Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: "Production"
+    ports:
+      - "5900:80"
+      - "5901:443"
+    depends_on:
+      - sql-server-db
