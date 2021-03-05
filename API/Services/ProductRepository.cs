@@ -23,6 +23,7 @@ namespace API.Services
 
         public async Task<List<Product>> GetProductsAsync(int pageSize = 10, int pageNumber = 0)
             => await this._db.Products
+                .OrderBy(p => p.Id)
                 .Skip(pageSize * pageNumber)
                 .Take(pageSize)
                 .ToListAsync();
