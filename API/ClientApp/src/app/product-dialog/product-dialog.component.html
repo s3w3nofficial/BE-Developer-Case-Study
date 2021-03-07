@@ -1,0 +1,24 @@
+<mat-form-field>
+  <mat-label>Name</mat-label>
+  <input matInput cdkFocusInitial [(ngModel)]="data.product.name" />
+</mat-form-field>
+
+<mat-form-field>
+  <mat-label>ImgUri</mat-label>
+  <input matInput cdkFocusInitial [(ngModel)]="data.product.imgUri" />
+</mat-form-field>
+
+<mat-form-field>
+  <mat-label>Price</mat-label>
+  <input matInput cdkFocusInitial [(ngModel)]="data.product.price" />
+</mat-form-field>
+
+<mat-form-field>
+  <mat-label>Description</mat-label>
+  <textarea matInput [(ngModel)]="data.product.description"></textarea>
+</mat-form-field>
+
+<div mat-dialog-actions>
+  <button mat-button [mat-dialog-close]="{ product: data.product }">OK</button>
+  <button mat-button (click)="cancel()">Cancel</button>
+</div>

@@ -30,6 +30,20 @@ namespace API.Services
 
         public int GetNumberOfProducts() => this._db.Products.Count();
 
+        public async Task<Product> CreateProductAsync(Product product)
+        {
+            await this._db.Products.AddAsync(product);
+            await this._db.SaveChangesAsync();
+
+            return product;
+        }
+
+        public async Task DeleteProductAsync(Product product)
+        {
+            this._db.Products.Remove(product);
+            await this._db.SaveChangesAsync();
+        }
+
         public async Task UpdateProductAsync(Product product)
         {
             this._db.Products.Update(product);

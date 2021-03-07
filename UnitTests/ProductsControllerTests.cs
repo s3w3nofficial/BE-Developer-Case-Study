@@ -148,10 +148,7 @@ namespace UnitTests
             var controller = new ProductsController(repository);
 
             // Act
-            var result = await controller.UpdateDescriptionAsync(9999, new UpdateProductDescriptionDto
-            {
-                Description = "abcd"
-            });
+            var result = await controller.UpdateDescriptionAsync(9999, "abcd");
 
             // Assert
             Assert.IsType<NotFoundObjectResult>(result);
@@ -171,10 +168,7 @@ namespace UnitTests
             var controller = new ProductsController(repository);
 
             // Act
-            var result = await controller.UpdateDescriptionAsync(1, new UpdateProductDescriptionDto
-            {
-                Description = "abcd"
-            });
+            var result = await controller.UpdateDescriptionAsync(1, "abcd");
 
             // Assert
             Assert.IsType<NoContentResult>(result);

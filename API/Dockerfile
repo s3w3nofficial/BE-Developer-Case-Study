@@ -10,6 +10,12 @@ RUN dotnet restore "./API.csproj"
 COPY . .
 WORKDIR "/src/."
 RUN dotnet build "API.csproj" -c Release -o /app/build
+RUN apt-get update && \
+    apt-get install -y wget && \
+    apt-get install -y gnupg2 && \
+    wget -qO- https://deb.nodesource.com/setup_14.x | bash - && \
+    apt-get install -y build-essential nodejs
+RUN npm install -g yarn
 
 FROM build AS publish
 RUN dotnet publish "API.csproj" -c Release -o /app/publish

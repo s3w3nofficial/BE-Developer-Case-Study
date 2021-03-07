@@ -1,0 +1,46 @@
+<button (click)="newProduct()" mat-button>
+  <mat-icon>add</mat-icon> Add Product
+</button>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef>No.</th>
+    <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef>Name</th>
+    <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="imgUri">
+    <th mat-header-cell *matHeaderCellDef>ImgUri</th>
+    <td mat-cell *matCellDef="let element">{{ element.imgUri }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="price">
+    <th mat-header-cell *matHeaderCellDef>Price</th>
+    <td mat-cell *matCellDef="let element">{{ element.price }} Kč</td>
+  </ng-container>
+
+  <ng-container matColumnDef="edit">
+    <th mat-header-cell *matHeaderCellDef>edit</th>
+    <td mat-cell *matCellDef="let element">
+      <button mat-raised-button color="primary" (click)="editProduct(element)">
+        Edit
+      </button>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="delete">
+    <th mat-header-cell *matHeaderCellDef>delete</th>
+    <td mat-cell *matCellDef="let element">
+      <button mat-raised-button color="warn" (click)="deleteProduct(element)">
+        Delete
+      </button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>
