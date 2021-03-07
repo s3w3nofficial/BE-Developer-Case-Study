@@ -12,6 +12,8 @@ namespace API.Services
         Product GetProduct(int id);
         Task<List<Product>> GetProductsAsync(int pageSize = 10, int pageNumber = 0);
         int GetNumberOfProducts();
+        Task<Product> CreateProductAsync(Product product);
+        Task DeleteProductAsync(Product product);
         Task UpdateProductAsync(Product product);
     }
 }
