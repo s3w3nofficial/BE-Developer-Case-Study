@@ -1,9 +1,11 @@
 using API.Extensions;
+using API.Models;
 using API.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -84,6 +86,10 @@ namespace API
             services.AddDbContext<ApplicationDbContext>(
                 options => options.UseSqlServer(Configuration.GetConnectionString("SqlServer")));
 
+            services.AddDefaultIdentity<ApplicationUser>(config => config.SignIn.RequireConfirmedEmail = false)
+                .AddRoles<IdentityRole<Guid>>()
+                .AddEntityFrameworkStores<ApplicationDbContext>();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "BE Developer Case Study API", Version = "v1" });
@@ -125,7 +131,8 @@ namespace API
             IApplicationBuilder app,
             IWebHostEnvironment env,
             ILogger<Startup> logger,
-            ApplicationDbContext db)
+            ApplicationDbContext db,
+            UserManager<ApplicationUser> userManager)
         {
             if (env.IsDevelopment())
             {
@@ -138,8 +145,8 @@ namespace API
                 app.UseSpaStaticFiles();
             }
 
-            // apply ef migrations on startup
-            db.Database.Migrate();
+            // seed users and apply migrations
+            app.Seed(db, userManager);
 
             app.UseSwagger();
             app.UseSwaggerUI(c =>
