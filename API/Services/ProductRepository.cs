@@ -16,10 +16,15 @@ namespace API.Services
             this._db = db;
         }
 
-        public Product GetProduct(int id)
+        public Product GetProduct(Guid id)
             => this._db.Products
                 .AsNoTracking()
                 .FirstOrDefault(p => p.Id == id);
+
+        public Product GetProduct(string slug)
+            => this._db.Products
+                .AsNoTracking()
+                .FirstOrDefault(p => SlugService.Slugify(p) == slug);
 
         public async Task<List<Product>> GetProductsAsync(int pageSize = 10, int pageNumber = 0)
             => await this._db.Products

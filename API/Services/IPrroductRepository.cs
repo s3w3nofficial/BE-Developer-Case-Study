@@ -9,7 +9,8 @@ namespace API.Services
 {
     public interface IProductRepository
     {
-        Product GetProduct(int id);
+        Product GetProduct(Guid id);
+        Product GetProduct(string slug);
         Task<List<Product>> GetProductsAsync(int pageSize = 10, int pageNumber = 0);
         int GetNumberOfProducts();
         Task<Product> CreateProductAsync(Product product);
