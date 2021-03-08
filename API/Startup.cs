@@ -63,12 +63,12 @@ namespace API
                     ValidIssuers = new List<string>
                     {
                         "https://localhost:5001",
-                        "https://localhost:5900"
+                        "http://localhost:5900"
                     },
                     ValidAudiences = new List<string>
                     {
                         "https://localhost:5001",
-                        "https://localhost:5900"
+                        "http://localhost:5900"
                     },
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration.GetSection("JwtSecret").Value))
                 };

@@ -1,6 +1,8 @@
 ﻿using API.Dtos;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
@@ -18,9 +20,11 @@ namespace API.Controllers
     [ApiController]
     public class AuthController : Controller
     {
-        public AuthController(IConfiguration configuration)
+        private readonly IWebHostEnvironment _currentEnvironment;
+        public AuthController(IConfiguration configuration, IWebHostEnvironment env)
         {
             Configuration = configuration;
+            this._currentEnvironment = env;
         }
 
         public IConfiguration Configuration { get; }
@@ -35,8 +39,8 @@ namespace API.Controllers
                 var signInCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
 
                 var tokenOptions = new JwtSecurityToken(
-                    issuer: "https://localhost:5001",
-                    audience: "https://localhost:5001",
+                    issuer: this._currentEnvironment.IsDevelopment() ? "https://localhost:5001" : "https://localhost:5900",
+                    audience: this._currentEnvironment.IsDevelopment() ? "https://localhost:5001" : "https://localhost:5900",
                     claims: new List<Claim>(),
                     expires: DateTime.Now.AddMinutes(5),
                     signingCredentials: signInCredentials);
