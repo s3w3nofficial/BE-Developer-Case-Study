@@ -9,6 +9,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using API.Services;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 
 namespace API.Controllers
 {
@@ -100,6 +101,7 @@ namespace API.Controllers
         /// <response code="404">If product does not exist</response>
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [Authorize]
         [HttpPut("{id:int}/description")]
         public async Task<IActionResult> UpdateDescriptionAsync(
             int id, 
@@ -133,6 +135,7 @@ namespace API.Controllers
         /// <response code="404">If product does not exist</response>
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [Authorize]
         [HttpPut("{id:int}")]
         public async Task<IActionResult> UpdateAsync(
             int id,
@@ -169,6 +172,7 @@ namespace API.Controllers
         /// <response code="400">If not all parameters are provided</response>
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [Authorize]
         [HttpPost]
         public async Task<ActionResult<ProductDto>> CreateAsync([FromBody] ProductDto productDto)
         {
@@ -193,6 +197,7 @@ namespace API.Controllers
         /// <response code="404">If product does not exist</response>
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [Authorize]
         [HttpDelete("{id:int}")]
         public async Task<IActionResult> DeleteAsync(int id)
         {
