@@ -4,10 +4,12 @@ using API.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace API.Services
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser, IdentityRole<Guid>, Guid>
     {
         public ApplicationDbContext()
         {
@@ -22,6 +24,9 @@ namespace API.Services
         {
             modelBuilder.Entity<Product>().Property(e => e.Price).HasPrecision(10, 2);
             modelBuilder.ApplyConfiguration(new ProductConfiguration());
+            modelBuilder.ApplyConfiguration(new RoleConfiguration());
+
+            base.OnModelCreating(modelBuilder);
         }
 
         public virtual DbSet<Product> Products { get; set; }
