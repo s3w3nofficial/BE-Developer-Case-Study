@@ -30,5 +30,6 @@ namespace API.Services
         }
 
         public virtual DbSet<Product> Products { get; set; }
+        public virtual DbSet<Category> Categories { get; set; }
     }
 }

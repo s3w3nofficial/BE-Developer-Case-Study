@@ -16,7 +16,8 @@ namespace API.Extensions
                 Name = product.Name,
                 ImgUri = product.ImgUri,
                 Price = product.Price,
-                Description = product.Description
+                Description = product.Description,
+                Category = product.Category
             };
     }
 }

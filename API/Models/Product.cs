@@ -16,5 +16,6 @@ namespace API.Models
         [Required]
         public decimal Price { get; init; }
         public string Description { get; init; } = "";
+        public Category Category { get; set; }
     }
 }

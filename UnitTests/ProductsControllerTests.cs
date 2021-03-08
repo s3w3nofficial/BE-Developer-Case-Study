@@ -50,7 +50,7 @@ namespace UnitTests
             var controller = new ProductsController(repository);
 
             // Act
-            var result = controller.Get(Guid.NewGuid());
+            var result = controller.Get(Guid.NewGuid().ToString());
 
             // Assert
             Assert.IsType<NotFoundObjectResult>(result.Result);
@@ -70,7 +70,7 @@ namespace UnitTests
             var controller = new ProductsController(repository);
 
             // Act
-            var result = controller.Get(data.FirstOrDefault().Id);
+            var result = controller.Get(data.FirstOrDefault().Id.ToString());
 
             // Assert
             Assert.IsType<OkObjectResult>(result.Result);
@@ -148,7 +148,7 @@ namespace UnitTests
             var controller = new ProductsController(repository);
 
             // Act
-            var result = await controller.UpdateDescriptionAsync(Guid.NewGuid(), "abcd");
+            var result = await controller.UpdateDescriptionAsync(Guid.NewGuid().ToString(), "abcd");
 
             // Assert
             Assert.IsType<NotFoundObjectResult>(result);
@@ -168,7 +168,7 @@ namespace UnitTests
             var controller = new ProductsController(repository);
 
             // Act
-            var result = await controller.UpdateDescriptionAsync(data.FirstOrDefault().Id, "abcd");
+            var result = await controller.UpdateDescriptionAsync(data.FirstOrDefault().Id.ToString(), "abcd");
 
             // Assert
             Assert.IsType<NoContentResult>(result);
