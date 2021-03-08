@@ -1,4 +1,5 @@
 ﻿using API.Dtos;
+using API.Errors;
 using API.Models;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -67,6 +68,41 @@ namespace API.Controllers
             }
 
             return Unauthorized();
+        }
+
+        [HttpPost("register")]
+        public async Task<IActionResult> Register([FromBody] RegisterDto registerDto)
+        {
+            if (await this._userManager.FindByEmailAsync(registerDto.UserName) != null)
+                return BadRequest(new ErrorDetails
+                {
+                    StatusCode = "auth-1",
+                    Message = "user already exists"
+                });
+
+            await this._userManager.CreateAsync(new ApplicationUser
+            {
+                Email = registerDto.UserName,
+                UserName = registerDto.UserName,
+            }, registerDto.Password);
+
+            var secretKey = new SymmetricSecurityKey(
+                Encoding.UTF8.GetBytes(Configuration.GetSection("JwtSecret").Value));
+            var signInCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
+
+            var tokenOptions = new JwtSecurityToken(
+                issuer: this._currentEnvironment.IsDevelopment() ? "https://localhost:5001" : "https://localhost:5900",
+                audience: this._currentEnvironment.IsDevelopment() ? "https://localhost:5001" : "https://localhost:5900",
+                claims: new List<Claim>() 
+                {
+                    new Claim(ClaimTypes.Name, registerDto.UserName)
+                },
+                expires: DateTime.Now.AddMinutes(5),
+                signingCredentials: signInCredentials);
+
+            var tokenString = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
+
+            return Ok(new { Token = tokenString });
         }
     }
 }
