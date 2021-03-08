@@ -1,0 +1,13 @@
+<form #loginForm="ngForm" (ngSubmit)="login(loginForm)">
+  <mat-form-field appearance="legacy">
+    <mat-label>username</mat-label>
+    <input matInput placeholder="Placeholder" name="username" ngModel />
+  </mat-form-field>
+  <mat-form-field appearance="legacy">
+    <mat-label>password</mat-label>
+    <input matInput placeholder="Placeholder" name="password" ngModel />
+  </mat-form-field>
+  <button mat-raised-button color="primary" type="submit">
+    Log In
+  </button>
+</form>
