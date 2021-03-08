@@ -12,6 +12,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
+import { JwtModule } from '@auth0/angular-jwt';
 
 import { AppComponent } from './app.component';
 import { ProductsComponent } from './products/products.component';
@@ -19,6 +20,12 @@ import { ProductComponent } from './product/product.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { AdminComponent } from './admin/admin.component';
 import { ProductDialogComponent } from './product-dialog/product-dialog.component';
+import { LoginComponent } from './login/login.component';
+import { AuthGuardService } from './guards/auth-guard.service';
+
+export function tokenGetter() {
+  return localStorage.getItem('jwt');
+}
 
 @NgModule({
   declarations: [
@@ -28,6 +35,7 @@ import { ProductDialogComponent } from './product-dialog/product-dialog.componen
     ProductDetailComponent,
     AdminComponent,
     ProductDialogComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -42,8 +50,15 @@ import { ProductDialogComponent } from './product-dialog/product-dialog.componen
     MatDialogModule,
     MatInputModule,
     FormsModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        allowedDomains: ['localhost:5001', 'localhost:5901'],
+        disallowedRoutes: []
+      },
+    }),
   ],
-  providers: [],
+  providers: [AuthGuardService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
