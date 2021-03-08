@@ -20,7 +20,7 @@ namespace UnitTests
         {
             new Product
             {
-                Id = 1,
+                Id = Guid.NewGuid(),
                 Name = "Test",
                 ImgUri = "https://via.placeholder.com/600x400",
                 Price = 39,
@@ -28,7 +28,7 @@ namespace UnitTests
             },
             new Product
             {
-                Id = 2,
+                Id = Guid.NewGuid(),
                 Name = "Test 2",
                 ImgUri = "https://via.placeholder.com/600x400",
                 Price = 339,
@@ -50,7 +50,7 @@ namespace UnitTests
             var controller = new ProductsController(repository);
 
             // Act
-            var result = controller.Get(9999);
+            var result = controller.Get(Guid.NewGuid());
 
             // Assert
             Assert.IsType<NotFoundObjectResult>(result.Result);
@@ -70,7 +70,7 @@ namespace UnitTests
             var controller = new ProductsController(repository);
 
             // Act
-            var result = controller.Get(1);
+            var result = controller.Get(data.FirstOrDefault().Id);
 
             // Assert
             Assert.IsType<OkObjectResult>(result.Result);
@@ -148,7 +148,7 @@ namespace UnitTests
             var controller = new ProductsController(repository);
 
             // Act
-            var result = await controller.UpdateDescriptionAsync(9999, "abcd");
+            var result = await controller.UpdateDescriptionAsync(Guid.NewGuid(), "abcd");
 
             // Assert
             Assert.IsType<NotFoundObjectResult>(result);
@@ -168,7 +168,7 @@ namespace UnitTests
             var controller = new ProductsController(repository);
 
             // Act
-            var result = await controller.UpdateDescriptionAsync(1, "abcd");
+            var result = await controller.UpdateDescriptionAsync(data.FirstOrDefault().Id, "abcd");
 
             // Assert
             Assert.IsType<NoContentResult>(result);

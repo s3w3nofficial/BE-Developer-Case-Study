@@ -72,22 +72,27 @@ namespace API.Controllers
         /// <summary>
         /// Retrieves specific ProductDto
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="query"></param>
         /// <returns>ProductDto with specified id</returns>
         /// <response code="200">Returns specific ProductDto</response>
         /// <response code="404">If product does not exist</response> 
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [HttpGet("{id:int}")]
-        public ActionResult<ProductDto> Get(int id)
+        [HttpGet("{query}")]
+        public ActionResult<ProductDto> Get(string query)
         {
-            var existingProduct = this._productService.GetProduct(id);
+            bool isValid = Guid.TryParse(query, out Guid guidOutput);
+            Product existingProduct;
+            if (isValid)
+                existingProduct = this._productService.GetProduct(guidOutput);
+            else
+                existingProduct = this._productService.GetProduct(query);
 
             if (existingProduct is null)
                 return NotFound(new ErrorDetails
                 {
                     StatusCode = "product-1",
-                    Message = $"product with id: {id} not found"
+                    Message = $"product with id or slug: {query} not found"
                 });
             return Ok(existingProduct.AsDto());
         }
@@ -95,25 +100,30 @@ namespace API.Controllers
         /// <summary>
         /// Updates description of specific ProductDto
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="query"></param>
         /// <param name="description"></param>
         /// <response code="204">Returns when successfully updated</response>
         /// <response code="404">If product does not exist</response>
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [Authorize(Roles = "Admin")]
-        [HttpPut("{id:int}/description")]
+        [HttpPut("{query}/description")]
         public async Task<IActionResult> UpdateDescriptionAsync(
-            int id, 
+            string query, 
             [FromBody] string description)
         {
-            var existingProduct = this._productService.GetProduct(id);
+            bool isValid = Guid.TryParse(query, out Guid guidOutput);
+            Product existingProduct;
+            if (isValid)
+                existingProduct = this._productService.GetProduct(guidOutput);
+            else
+                existingProduct = this._productService.GetProduct(query);
 
             if (existingProduct is null)
                 return NotFound(new ErrorDetails
                 {
                     StatusCode = "product-1",
-                    Message = $"product with id: {id} not found"
+                    Message = $"product with id or slug: {query} not found"
                 });
 
             Product updatedProduct = existingProduct with
@@ -129,25 +139,30 @@ namespace API.Controllers
         /// <summary>
         /// Updates specific ProductDto
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="query"></param>
         /// <param name="productDto"></param>
         /// <response code="204">Returns when successfully updated</response>
         /// <response code="404">If product does not exist</response>
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [Authorize(Roles = "Admin")]
-        [HttpPut("{id:int}")]
+        [HttpPut("{query}")]
         public async Task<IActionResult> UpdateAsync(
-            int id,
+            string query,
             [FromBody] ProductDto productDto)
         {
-            var existingProduct = this._productService.GetProduct(id);
+            bool isValid = Guid.TryParse(query, out Guid guidOutput);
+            Product existingProduct;
+            if (isValid)
+                existingProduct = this._productService.GetProduct(guidOutput);
+            else
+                existingProduct = this._productService.GetProduct(query);
 
             if (existingProduct is null)
                 return NotFound(new ErrorDetails
                 {
                     StatusCode = "product-1",
-                    Message = $"product with id: {id} not found"
+                    Message = $"product with id or slug: {query} not found"
                 });
 
             Product updatedProduct = existingProduct with
@@ -192,22 +207,27 @@ namespace API.Controllers
         /// <summary>
         /// Deletes Product
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="query"></param>
         /// <response code="204">Returns when successfully deleted</response>
         /// <response code="404">If product does not exist</response>
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [Authorize(Roles = "Admin")]
-        [HttpDelete("{id:int}")]
-        public async Task<IActionResult> DeleteAsync(int id)
+        [HttpDelete("{query}")]
+        public async Task<IActionResult> DeleteAsync(string query)
         {
-            var existingProduct = this._productService.GetProduct(id);
+            bool isValid = Guid.TryParse(query, out Guid guidOutput);
+            Product existingProduct;
+            if (isValid)
+                existingProduct = this._productService.GetProduct(guidOutput);
+            else
+                existingProduct = this._productService.GetProduct(query);
 
             if (existingProduct is null)
                 return NotFound(new ErrorDetails
                 {
                     StatusCode = "product-1",
-                    Message = $"product with id: {id} not found"
+                    Message = $"product with id or slug: {query} not found"
                 });
 
             await this._productService.DeleteProductAsync(existingProduct);

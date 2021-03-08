@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace API.Migrations
 {
-    public partial class AddIdentity : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -44,6 +44,21 @@ namespace API.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Products",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ImgUri = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Price = table.Column<decimal>(type: "decimal(10,2)", precision: 10, scale: 2, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Products", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -152,6 +167,29 @@ namespace API.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[] { new Guid("1b2a1dfc-22b1-4029-8229-6833d63c3c71"), "", "Admin", "ADMIN" });
+
+            migrationBuilder.InsertData(
+                table: "Products",
+                columns: new[] { "Id", "Description", "ImgUri", "Name", "Price" },
+                values: new object[,]
+                {
+                    { new Guid("6b15d5d6-badf-4475-a358-999d125dc9ca"), "Test Test Test", "https://via.placeholder.com/600x400", "Test", 39m },
+                    { new Guid("6b17f38d-ea52-4ca1-9de0-23864cca988a"), "Test 2 Test 2 Test", "https://via.placeholder.com/600x400", "Test 2", 339m },
+                    { new Guid("01ba1e57-5264-42cb-a071-9de6afdb1efd"), "Test 3 Test 3 Test", "https://via.placeholder.com/600x400", "Test 3", 499.50m },
+                    { new Guid("6198a31e-fed9-41cb-843b-75a15df3abb2"), "Test 4 Test 4 Test", "https://via.placeholder.com/600x400", "Test 4", 88m },
+                    { new Guid("a87c9c24-4100-4460-bea3-5479c9de7366"), "Test 5 Test 5 Test", "https://via.placeholder.com/600x400", "Test 5", 201.60m },
+                    { new Guid("c044ebfa-c63b-4cad-a206-99414354d547"), "Test 6 Test 6 Test", "https://via.placeholder.com/600x400", "Test 6", 499m },
+                    { new Guid("8d60f1d1-54b2-4d20-b7b7-2333d05e985b"), "Test 7 Test 7 Test", "https://via.placeholder.com/600x400", "Test 7", 301m },
+                    { new Guid("3eb26bc1-bb62-4f8b-b121-75132d547a4f"), "Test 8 Test 8 Test", "https://via.placeholder.com/600x400", "Test 8", 1113m },
+                    { new Guid("81a3aa6d-8069-4149-80aa-3d0bd4bd6dcb"), "Test 9 Test 9 Test", "https://via.placeholder.com/600x400", "Test 9", 433.90m },
+                    { new Guid("0f41234e-16f3-41b3-a33e-c1725df153e3"), "Test 10 Test 10 Test", "https://via.placeholder.com/600x400", "Test 10", 349.22m },
+                    { new Guid("b44a221e-d4af-4080-83a2-d02e79688852"), "Test 11 Test 11 Test", "https://via.placeholder.com/600x400", "Test 11", 3039.99m }
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -208,6 +246,9 @@ namespace API.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "Products");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

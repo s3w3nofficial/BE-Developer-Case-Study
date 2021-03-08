@@ -14,7 +14,7 @@ namespace API.Configuration
             builder.HasData(
                 new Product
                 {
-                    Id = 1,
+                    Id = Guid.NewGuid(),
                     Name = "Test",
                     ImgUri = "https://via.placeholder.com/600x400",
                     Price = 39,
@@ -22,7 +22,7 @@ namespace API.Configuration
                 },
                 new Product
                 {
-                    Id = 2,
+                    Id = Guid.NewGuid(),
                     Name = "Test 2",
                     ImgUri = "https://via.placeholder.com/600x400",
                     Price = 339,
@@ -30,7 +30,7 @@ namespace API.Configuration
                 },
                 new Product
                 {
-                    Id = 3,
+                    Id = Guid.NewGuid(),
                     Name = "Test 3",
                     ImgUri = "https://via.placeholder.com/600x400",
                     Price = 499.50M,
@@ -38,7 +38,7 @@ namespace API.Configuration
                 },
                 new Product
                 {
-                    Id = 4,
+                    Id = Guid.NewGuid(),
                     Name = "Test 4",
                     ImgUri = "https://via.placeholder.com/600x400",
                     Price = 88,
@@ -46,7 +46,7 @@ namespace API.Configuration
                 },
                 new Product
                 {
-                    Id = 5,
+                    Id = Guid.NewGuid(),
                     Name = "Test 5",
                     ImgUri = "https://via.placeholder.com/600x400",
                     Price = 201.60M,
@@ -54,7 +54,7 @@ namespace API.Configuration
                 },
                 new Product
                 {
-                    Id = 6,
+                    Id = Guid.NewGuid(),
                     Name = "Test 6",
                     ImgUri = "https://via.placeholder.com/600x400",
                     Price = 499,
@@ -62,7 +62,7 @@ namespace API.Configuration
                 },
                 new Product
                 {
-                    Id = 7,
+                    Id = Guid.NewGuid(),
                     Name = "Test 7",
                     ImgUri = "https://via.placeholder.com/600x400",
                     Price = 301,
@@ -70,7 +70,7 @@ namespace API.Configuration
                 },
                 new Product
                 {
-                    Id = 8,
+                    Id = Guid.NewGuid(),
                     Name = "Test 8",
                     ImgUri = "https://via.placeholder.com/600x400",
                     Price = 1113,
@@ -78,7 +78,7 @@ namespace API.Configuration
                 },
                 new Product
                 {
-                    Id = 9,
+                    Id = Guid.NewGuid(),
                     Name = "Test 9",
                     ImgUri = "https://via.placeholder.com/600x400",
                     Price = 433.90M,
@@ -86,7 +86,7 @@ namespace API.Configuration
                 },
                 new Product
                 {
-                    Id = 10,
+                    Id = Guid.NewGuid(),
                     Name = "Test 10",
                     ImgUri = "https://via.placeholder.com/600x400",
                     Price = 349.22M,
@@ -94,7 +94,7 @@ namespace API.Configuration
                 },
                 new Product
                 {
-                    Id = 11,
+                    Id = Guid.NewGuid(),
                     Name = "Test 11",
                     ImgUri = "https://via.placeholder.com/600x400",
                     Price = 3039.99M,

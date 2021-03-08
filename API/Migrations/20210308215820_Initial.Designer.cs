@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210308205107_AddRoleSeed")]
-    partial class AddRoleSeed
+    [Migration("20210308215820_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -89,10 +89,9 @@ namespace API.Migrations
 
             modelBuilder.Entity("API.Models.Product", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
@@ -116,7 +115,7 @@ namespace API.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 1,
+                            Id = new Guid("6b15d5d6-badf-4475-a358-999d125dc9ca"),
                             Description = "Test Test Test",
                             ImgUri = "https://via.placeholder.com/600x400",
                             Name = "Test",
@@ -124,7 +123,7 @@ namespace API.Migrations
                         },
                         new
                         {
-                            Id = 2,
+                            Id = new Guid("6b17f38d-ea52-4ca1-9de0-23864cca988a"),
                             Description = "Test 2 Test 2 Test",
                             ImgUri = "https://via.placeholder.com/600x400",
                             Name = "Test 2",
@@ -132,7 +131,7 @@ namespace API.Migrations
                         },
                         new
                         {
-                            Id = 3,
+                            Id = new Guid("01ba1e57-5264-42cb-a071-9de6afdb1efd"),
                             Description = "Test 3 Test 3 Test",
                             ImgUri = "https://via.placeholder.com/600x400",
                             Name = "Test 3",
@@ -140,7 +139,7 @@ namespace API.Migrations
                         },
                         new
                         {
-                            Id = 4,
+                            Id = new Guid("6198a31e-fed9-41cb-843b-75a15df3abb2"),
                             Description = "Test 4 Test 4 Test",
                             ImgUri = "https://via.placeholder.com/600x400",
                             Name = "Test 4",
@@ -148,7 +147,7 @@ namespace API.Migrations
                         },
                         new
                         {
-                            Id = 5,
+                            Id = new Guid("a87c9c24-4100-4460-bea3-5479c9de7366"),
                             Description = "Test 5 Test 5 Test",
                             ImgUri = "https://via.placeholder.com/600x400",
                             Name = "Test 5",
@@ -156,7 +155,7 @@ namespace API.Migrations
                         },
                         new
                         {
-                            Id = 6,
+                            Id = new Guid("c044ebfa-c63b-4cad-a206-99414354d547"),
                             Description = "Test 6 Test 6 Test",
                             ImgUri = "https://via.placeholder.com/600x400",
                             Name = "Test 6",
@@ -164,7 +163,7 @@ namespace API.Migrations
                         },
                         new
                         {
-                            Id = 7,
+                            Id = new Guid("8d60f1d1-54b2-4d20-b7b7-2333d05e985b"),
                             Description = "Test 7 Test 7 Test",
                             ImgUri = "https://via.placeholder.com/600x400",
                             Name = "Test 7",
@@ -172,7 +171,7 @@ namespace API.Migrations
                         },
                         new
                         {
-                            Id = 8,
+                            Id = new Guid("3eb26bc1-bb62-4f8b-b121-75132d547a4f"),
                             Description = "Test 8 Test 8 Test",
                             ImgUri = "https://via.placeholder.com/600x400",
                             Name = "Test 8",
@@ -180,7 +179,7 @@ namespace API.Migrations
                         },
                         new
                         {
-                            Id = 9,
+                            Id = new Guid("81a3aa6d-8069-4149-80aa-3d0bd4bd6dcb"),
                             Description = "Test 9 Test 9 Test",
                             ImgUri = "https://via.placeholder.com/600x400",
                             Name = "Test 9",
@@ -188,7 +187,7 @@ namespace API.Migrations
                         },
                         new
                         {
-                            Id = 10,
+                            Id = new Guid("0f41234e-16f3-41b3-a33e-c1725df153e3"),
                             Description = "Test 10 Test 10 Test",
                             ImgUri = "https://via.placeholder.com/600x400",
                             Name = "Test 10",
@@ -196,7 +195,7 @@ namespace API.Migrations
                         },
                         new
                         {
-                            Id = 11,
+                            Id = new Guid("b44a221e-d4af-4080-83a2-d02e79688852"),
                             Description = "Test 11 Test 11 Test",
                             ImgUri = "https://via.placeholder.com/600x400",
                             Name = "Test 11",
@@ -234,7 +233,7 @@ namespace API.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("40551daa-669c-449c-b642-b3a9c86f5069"),
+                            Id = new Guid("1b2a1dfc-22b1-4029-8229-6833d63c3c71"),
                             ConcurrencyStamp = "",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
