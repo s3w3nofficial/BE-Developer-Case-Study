@@ -47,11 +47,13 @@ namespace API.Controllers
                     Encoding.UTF8.GetBytes(Configuration.GetSection("JwtSecret").Value));
                 var signInCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
 
-                var claims = new List<Claim>();
+                var claims = new List<Claim>() 
+                {
+                    new Claim(ClaimTypes.Name, loginDto.UserName),
+                };
 
                 if (await this._userManager.IsInRoleAsync(user, "Admin"))
                 {
-                    claims.Add(new Claim(ClaimTypes.Name, loginDto.UserName));
                     claims.Add(new Claim(ClaimTypes.Role, "Admin"));
                 }
 
