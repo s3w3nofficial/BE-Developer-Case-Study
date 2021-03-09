@@ -1,7 +1,9 @@
 ﻿using API.Dtos;
 using API.Errors;
 using API.Extensions;
+using API.Models;
 using API.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -47,16 +49,99 @@ namespace API.Controllers
         [HttpGet("{id}")]
         public ActionResult<CategoryDto> Get(Guid id)
         {
-            var existingProduct = this._categoryRepository.GetCategory(id);
+            var existingCategory = this._categoryRepository.GetCategory(id);
 
-            if (existingProduct is null)
+            if (existingCategory is null)
                 return NotFound(new ErrorDetails
                 {
                     StatusCode = "category-1",
                     Message = $"category with id: {id} not found"
                 });
 
-            return Ok(existingProduct.AsDto());
+            return Ok(existingCategory.AsDto());
+        }
+
+        /// <summary>
+        /// Updates specific Category
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="categoryDto"></param>
+        /// <response code="204">Returns when successfully updated</response>
+        /// <response code="404">If category does not exist</response>
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [Authorize(Roles = "Admin")]
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateAsync(
+            Guid id,
+            [FromBody] CategoryDto categoryDto)
+        {
+            var existingCategory = this._categoryRepository.GetCategory(id);
+
+            if (existingCategory is null)
+                return NotFound(new ErrorDetails
+                {
+                    StatusCode = "category-1",
+                    Message = $"category with id: {id} not found"
+                });
+
+            Category updatedCategory = existingCategory with
+            {
+                Name = categoryDto.Name,
+            };
+
+            await this._categoryRepository.UpdateCategoryAsync(updatedCategory);
+
+            return NoContent();
+        }
+
+        /// <summary>
+        /// Creates new Category
+        /// </summary>
+        /// <param name="categoryDto"></param>
+        /// <returns>Created Category as ProductDto</returns>
+        /// <response code="201">Returns when successfully created</response>
+        /// <response code="400">If not all parameters are provided</response>
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [Authorize(Roles = "Admin")]
+        [HttpPost]
+        public async Task<ActionResult<ProductDto>> CreateAsync([FromBody] CategoryDto categoryDto)
+        {
+            Category newCategory = new()
+            {
+                Name = categoryDto.Name,
+            };
+
+            var category = await this._categoryRepository.CreateCategoryAsync(newCategory);
+
+            return Created("", category);
+        }
+
+        /// <summary>
+        /// Deletes Category
+        /// </summary>
+        /// <param name="id"></param>
+        /// <response code="204">Returns when successfully deleted</response>
+        /// <response code="404">If category does not exist</response>
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [Authorize(Roles = "Admin")]
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteAsync(Guid id)
+        {
+            var existingCategory = this._categoryRepository.GetCategory(id);
+
+            if (existingCategory is null)
+                return NotFound(new ErrorDetails
+                {
+                    StatusCode = "category-1",
+                    Message = $"category with id: {id} not found"
+                });
+
+            await this._categoryRepository.DeleteCategoryAsync(existingCategory);
+
+            return NoContent();
         }
     }
 }

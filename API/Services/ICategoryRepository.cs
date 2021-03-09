@@ -10,5 +10,8 @@ namespace API.Services
     {
         Category GetCategory(Guid id);
         Task<IEnumerable<Category>> GetCategoriesAsync();
+        Task<Category> CreateCategoryAsync(Category category);
+        Task DeleteCategoryAsync(Category category);
+        Task UpdateCategoryAsync(Category category);
     }
 }

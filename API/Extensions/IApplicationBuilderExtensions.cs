@@ -12,11 +12,23 @@ namespace API.Extensions
 {
     public static class IApplicationBuilderExtensions
     {
-        public static void   Seed(this IApplicationBuilder applicationBuilder, 
+        public static void Seed(this IApplicationBuilder applicationBuilder, 
             ApplicationDbContext db, UserManager<ApplicationUser> userManager)
         {
             // apply ef migrations
             db.Database.Migrate();
+
+            // add category to first product
+            var prodcut = db.Products.AsNoTracking().FirstOrDefault();
+            if (prodcut != null && prodcut.Category == null)
+            {
+                var updatedProduct = prodcut with
+                {
+                    Category = db.Categories.FirstOrDefault()
+                };
+                db.Products.Update(updatedProduct);
+                db.SaveChanges();
+            }
 
             var exists = userManager.FindByEmailAsync("admin@admin.cz").Result;
             if (exists is null)

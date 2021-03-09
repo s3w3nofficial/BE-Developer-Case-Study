@@ -22,5 +22,25 @@ namespace API.Services
             => await this._db.Categories
                 .OrderBy(c => c.Id)
                 .ToListAsync();
+
+        public async Task<Category> CreateCategoryAsync(Category category)
+        {
+            await this._db.Categories.AddAsync(category);
+            await this._db.SaveChangesAsync();
+
+            return category;
+        }
+
+        public async Task DeleteCategoryAsync(Category category)
+        {
+            this._db.Categories.Remove(category);
+            await this._db.SaveChangesAsync();
+        }
+
+        public async Task UpdateCategoryAsync(Category category)
+        {
+            this._db.Categories.Update(category);
+            await this._db.SaveChangesAsync();
+        }
     }
 }
