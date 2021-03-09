@@ -8,6 +8,6 @@ namespace API.Dtos
     public record ShoppingCartDto
     {
         public IEnumerable<ProductDto> Products { get; init; }
-        public decimal TotalPrice { get; init; }
+        public decimal TotalPrice { get => this.Products.Sum(p => p.Price); }
     }
 }
