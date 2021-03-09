@@ -47,18 +47,15 @@ namespace API.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Products",
+                name: "Categories",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ImgUri = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Price = table.Column<decimal>(type: "decimal(10,2)", precision: 10, scale: 2, nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Products", x => x.Id);
+                    table.PrimaryKey("PK_Categories", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -167,27 +164,59 @@ namespace API.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Products",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ImgUri = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Price = table.Column<decimal>(type: "decimal(10,2)", precision: 10, scale: 2, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CategoryId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Products", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Products_Categories_CategoryId",
+                        column: x => x.CategoryId,
+                        principalTable: "Categories",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { new Guid("1b2a1dfc-22b1-4029-8229-6833d63c3c71"), "", "Admin", "ADMIN" });
+                values: new object[] { new Guid("4a2c979e-26cd-48aa-82d3-f6ecb9311ee1"), "", "Admin", "ADMIN" });
+
+            migrationBuilder.InsertData(
+                table: "Categories",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
+                {
+                    { new Guid("bfa608cc-35e1-4459-bd2f-b03671e95ad1"), "test-category-1" },
+                    { new Guid("b60236aa-db10-447a-a148-05f684fd7623"), "test-category-2" },
+                    { new Guid("dc86f3ec-a741-422c-9b8f-4199a588567f"), "test-category-3" }
+                });
 
             migrationBuilder.InsertData(
                 table: "Products",
-                columns: new[] { "Id", "Description", "ImgUri", "Name", "Price" },
+                columns: new[] { "Id", "CategoryId", "Description", "ImgUri", "Name", "Price" },
                 values: new object[,]
                 {
-                    { new Guid("6b15d5d6-badf-4475-a358-999d125dc9ca"), "Test Test Test", "https://via.placeholder.com/600x400", "Test", 39m },
-                    { new Guid("6b17f38d-ea52-4ca1-9de0-23864cca988a"), "Test 2 Test 2 Test", "https://via.placeholder.com/600x400", "Test 2", 339m },
-                    { new Guid("01ba1e57-5264-42cb-a071-9de6afdb1efd"), "Test 3 Test 3 Test", "https://via.placeholder.com/600x400", "Test 3", 499.50m },
-                    { new Guid("6198a31e-fed9-41cb-843b-75a15df3abb2"), "Test 4 Test 4 Test", "https://via.placeholder.com/600x400", "Test 4", 88m },
-                    { new Guid("a87c9c24-4100-4460-bea3-5479c9de7366"), "Test 5 Test 5 Test", "https://via.placeholder.com/600x400", "Test 5", 201.60m },
-                    { new Guid("c044ebfa-c63b-4cad-a206-99414354d547"), "Test 6 Test 6 Test", "https://via.placeholder.com/600x400", "Test 6", 499m },
-                    { new Guid("8d60f1d1-54b2-4d20-b7b7-2333d05e985b"), "Test 7 Test 7 Test", "https://via.placeholder.com/600x400", "Test 7", 301m },
-                    { new Guid("3eb26bc1-bb62-4f8b-b121-75132d547a4f"), "Test 8 Test 8 Test", "https://via.placeholder.com/600x400", "Test 8", 1113m },
-                    { new Guid("81a3aa6d-8069-4149-80aa-3d0bd4bd6dcb"), "Test 9 Test 9 Test", "https://via.placeholder.com/600x400", "Test 9", 433.90m },
-                    { new Guid("0f41234e-16f3-41b3-a33e-c1725df153e3"), "Test 10 Test 10 Test", "https://via.placeholder.com/600x400", "Test 10", 349.22m },
-                    { new Guid("b44a221e-d4af-4080-83a2-d02e79688852"), "Test 11 Test 11 Test", "https://via.placeholder.com/600x400", "Test 11", 3039.99m }
+                    { new Guid("114ff6f8-5a40-4345-b450-e025efccddab"), null, "Test Test Test", "https://via.placeholder.com/600x400", "Test", 39m },
+                    { new Guid("a1f68089-4136-4c8c-9d16-8838b0d68d8d"), null, "Test 2 Test 2 Test", "https://via.placeholder.com/600x400", "Test 2", 339m },
+                    { new Guid("8ab4f6d5-92f1-4887-8207-675f10385d05"), null, "Test 3 Test 3 Test", "https://via.placeholder.com/600x400", "Test 3", 499.50m },
+                    { new Guid("225c7e01-738b-47ef-a5b7-d376f723d014"), null, "Test 4 Test 4 Test", "https://via.placeholder.com/600x400", "Test 4", 88m },
+                    { new Guid("057bf4b4-40b4-441f-9dec-558269f4fe33"), null, "Test 5 Test 5 Test", "https://via.placeholder.com/600x400", "Test 5", 201.60m },
+                    { new Guid("389d24f4-a45a-479e-bfd7-34672ab2a85d"), null, "Test 6 Test 6 Test", "https://via.placeholder.com/600x400", "Test 6", 499m },
+                    { new Guid("1897cd44-535c-4703-b961-8bdbe6a8fbff"), null, "Test 7 Test 7 Test", "https://via.placeholder.com/600x400", "Test 7", 301m },
+                    { new Guid("dec695c2-3a88-4580-bf71-f638060806a5"), null, "Test 8 Test 8 Test", "https://via.placeholder.com/600x400", "Test 8", 1113m },
+                    { new Guid("d79340a6-c49c-4ec8-a955-0150b9a600d9"), null, "Test 9 Test 9 Test", "https://via.placeholder.com/600x400", "Test 9", 433.90m },
+                    { new Guid("36e44bba-6c3f-4ca1-bb37-7085ca2e60c4"), null, "Test 10 Test 10 Test", "https://via.placeholder.com/600x400", "Test 10", 349.22m },
+                    { new Guid("6b7b5494-9e87-47ce-b7e4-c5a0f319231d"), null, "Test 11 Test 11 Test", "https://via.placeholder.com/600x400", "Test 11", 3039.99m }
                 });
 
             migrationBuilder.CreateIndex(
@@ -228,6 +257,11 @@ namespace API.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Products_CategoryId",
+                table: "Products",
+                column: "CategoryId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -255,6 +289,9 @@ namespace API.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Categories");
         }
     }
 }

@@ -45,7 +45,7 @@ namespace API.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [HttpGet("{id}")]
-        public ActionResult<ProductDto> Get(Guid id)
+        public ActionResult<CategoryDto> Get(Guid id)
         {
             var existingProduct = this._categoryRepository.GetCategory(id);
 

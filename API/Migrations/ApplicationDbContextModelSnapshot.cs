@@ -97,6 +97,23 @@ namespace API.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Categories");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("bfa608cc-35e1-4459-bd2f-b03671e95ad1"),
+                            Name = "test-category-1"
+                        },
+                        new
+                        {
+                            Id = new Guid("b60236aa-db10-447a-a148-05f684fd7623"),
+                            Name = "test-category-2"
+                        },
+                        new
+                        {
+                            Id = new Guid("dc86f3ec-a741-422c-9b8f-4199a588567f"),
+                            Name = "test-category-3"
+                        });
                 });
 
             modelBuilder.Entity("API.Models.Product", b =>
@@ -132,7 +149,7 @@ namespace API.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("0a60cbcf-5a19-4928-b247-583414f59e96"),
+                            Id = new Guid("114ff6f8-5a40-4345-b450-e025efccddab"),
                             Description = "Test Test Test",
                             ImgUri = "https://via.placeholder.com/600x400",
                             Name = "Test",
@@ -140,7 +157,7 @@ namespace API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("6554f526-b1f0-4902-8143-d7598cc8b2c8"),
+                            Id = new Guid("a1f68089-4136-4c8c-9d16-8838b0d68d8d"),
                             Description = "Test 2 Test 2 Test",
                             ImgUri = "https://via.placeholder.com/600x400",
                             Name = "Test 2",
@@ -148,7 +165,7 @@ namespace API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("d62e9666-7b82-4b8d-bedb-f71b14f4cf88"),
+                            Id = new Guid("8ab4f6d5-92f1-4887-8207-675f10385d05"),
                             Description = "Test 3 Test 3 Test",
                             ImgUri = "https://via.placeholder.com/600x400",
                             Name = "Test 3",
@@ -156,7 +173,7 @@ namespace API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("ca06e259-85aa-4dcb-9085-e81cde0701bd"),
+                            Id = new Guid("225c7e01-738b-47ef-a5b7-d376f723d014"),
                             Description = "Test 4 Test 4 Test",
                             ImgUri = "https://via.placeholder.com/600x400",
                             Name = "Test 4",
@@ -164,7 +181,7 @@ namespace API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("c6c64d32-951d-45c4-89b6-0c0ebd4e1cc1"),
+                            Id = new Guid("057bf4b4-40b4-441f-9dec-558269f4fe33"),
                             Description = "Test 5 Test 5 Test",
                             ImgUri = "https://via.placeholder.com/600x400",
                             Name = "Test 5",
@@ -172,7 +189,7 @@ namespace API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("1e47bd63-680e-4aba-86a6-db5afed8163f"),
+                            Id = new Guid("389d24f4-a45a-479e-bfd7-34672ab2a85d"),
                             Description = "Test 6 Test 6 Test",
                             ImgUri = "https://via.placeholder.com/600x400",
                             Name = "Test 6",
@@ -180,7 +197,7 @@ namespace API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("d37c967d-215e-4625-885b-6095e4d7feed"),
+                            Id = new Guid("1897cd44-535c-4703-b961-8bdbe6a8fbff"),
                             Description = "Test 7 Test 7 Test",
                             ImgUri = "https://via.placeholder.com/600x400",
                             Name = "Test 7",
@@ -188,7 +205,7 @@ namespace API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("1d1f181b-ece6-4319-88e5-662ae58aa08e"),
+                            Id = new Guid("dec695c2-3a88-4580-bf71-f638060806a5"),
                             Description = "Test 8 Test 8 Test",
                             ImgUri = "https://via.placeholder.com/600x400",
                             Name = "Test 8",
@@ -196,7 +213,7 @@ namespace API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("3bf77edf-1f55-4648-9930-aaea459bdf80"),
+                            Id = new Guid("d79340a6-c49c-4ec8-a955-0150b9a600d9"),
                             Description = "Test 9 Test 9 Test",
                             ImgUri = "https://via.placeholder.com/600x400",
                             Name = "Test 9",
@@ -204,7 +221,7 @@ namespace API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("7a7c778b-36ad-4b5b-a7b7-9675eada973b"),
+                            Id = new Guid("36e44bba-6c3f-4ca1-bb37-7085ca2e60c4"),
                             Description = "Test 10 Test 10 Test",
                             ImgUri = "https://via.placeholder.com/600x400",
                             Name = "Test 10",
@@ -212,7 +229,7 @@ namespace API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("33775884-cd59-4842-86ab-7f4e9766d54f"),
+                            Id = new Guid("6b7b5494-9e87-47ce-b7e4-c5a0f319231d"),
                             Description = "Test 11 Test 11 Test",
                             ImgUri = "https://via.placeholder.com/600x400",
                             Name = "Test 11",
@@ -250,7 +267,7 @@ namespace API.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("f931582f-dcf7-4ef0-a821-b238fea4a39f"),
+                            Id = new Guid("4a2c979e-26cd-48aa-82d3-f6ecb9311ee1"),
                             ConcurrencyStamp = "",
                             Name = "Admin",
                             NormalizedName = "ADMIN"

@@ -25,6 +25,7 @@ namespace API.Services
             modelBuilder.Entity<Product>().Property(e => e.Price).HasPrecision(10, 2);
             modelBuilder.ApplyConfiguration(new ProductConfiguration());
             modelBuilder.ApplyConfiguration(new RoleConfiguration());
+            modelBuilder.ApplyConfiguration(new CategoryConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }

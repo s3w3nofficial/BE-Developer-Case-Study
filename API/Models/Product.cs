@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace API.Models
 {
@@ -16,6 +17,6 @@ namespace API.Models
         [Required]
         public decimal Price { get; init; }
         public string Description { get; init; } = "";
-        public Category Category { get; set; }
+        public Category Category { get; init; }
     }
 }
