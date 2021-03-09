@@ -8,5 +8,6 @@ namespace API.Models
 {
     public class ApplicationUser : IdentityUser<Guid>
     {
+        public ICollection<Product> Products { get; set; } = new List<Product>();
     }
 }
