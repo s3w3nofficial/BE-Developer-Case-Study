@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace API.Models
+namespace API.Dtos
 {
-    public record Category
+    public record CategoryDto
     {
-        [Key]
         public Guid Id { get; init; }
         public string Name { get; init; }
     }
