@@ -19,15 +19,18 @@ namespace API.Services
         public Product GetProduct(Guid id)
             => this._db.Products
                 .AsNoTracking()
+                .Include(p => p.Category)
                 .FirstOrDefault(p => p.Id == id);
 
         public Product GetProduct(string slug)
             => this._db.Products
                 .AsNoTracking()
+                .Include(p => p.Category)
                 .FirstOrDefault(p => SlugService.Slugify(p) == slug);
 
         public async Task<List<Product>> GetProductsAsync(int pageSize = 10, int pageNumber = 0)
             => await this._db.Products
+                .Include(p => p.Category)
                 .OrderBy(p => p.Id)
                 .Skip(pageSize * pageNumber)
                 .Take(pageSize)

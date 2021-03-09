@@ -70,7 +70,7 @@ namespace API.Controllers
         }
 
         /// <summary>
-        /// Retrieves specific ProductDto
+        /// Retrieves specific Product
         /// </summary>
         /// <param name="query"></param>
         /// <returns>ProductDto with specified id</returns>

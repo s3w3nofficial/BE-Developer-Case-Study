@@ -1,4 +1,5 @@
-﻿using API.Services;
+﻿using API.Models;
+using API.Services;
 using Slugify;
 using System;
 using System.Collections.Generic;
@@ -19,5 +20,6 @@ namespace API.Dtos
         public decimal Price { get; init; }
         public string Description { get; init; } = "";
         public string Slug { get => SlugService.Slugify(this); }
+        public Category Category { get; set; }
     }
 }

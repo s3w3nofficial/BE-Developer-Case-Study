@@ -85,10 +85,44 @@ namespace API.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
+            modelBuilder.Entity("API.Models.Category", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Categories");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("bfa608cc-35e1-4459-bd2f-b03671e95ad1"),
+                            Name = "test-category-1"
+                        },
+                        new
+                        {
+                            Id = new Guid("b60236aa-db10-447a-a148-05f684fd7623"),
+                            Name = "test-category-2"
+                        },
+                        new
+                        {
+                            Id = new Guid("dc86f3ec-a741-422c-9b8f-4199a588567f"),
+                            Name = "test-category-3"
+                        });
+                });
+
             modelBuilder.Entity("API.Models.Product", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("CategoryId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Description")
@@ -108,12 +142,14 @@ namespace API.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CategoryId");
+
                     b.ToTable("Products");
 
                     b.HasData(
                         new
                         {
-                            Id = new Guid("6b15d5d6-badf-4475-a358-999d125dc9ca"),
+                            Id = new Guid("114ff6f8-5a40-4345-b450-e025efccddab"),
                             Description = "Test Test Test",
                             ImgUri = "https://via.placeholder.com/600x400",
                             Name = "Test",
@@ -121,7 +157,7 @@ namespace API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("6b17f38d-ea52-4ca1-9de0-23864cca988a"),
+                            Id = new Guid("a1f68089-4136-4c8c-9d16-8838b0d68d8d"),
                             Description = "Test 2 Test 2 Test",
                             ImgUri = "https://via.placeholder.com/600x400",
                             Name = "Test 2",
@@ -129,7 +165,7 @@ namespace API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("01ba1e57-5264-42cb-a071-9de6afdb1efd"),
+                            Id = new Guid("8ab4f6d5-92f1-4887-8207-675f10385d05"),
                             Description = "Test 3 Test 3 Test",
                             ImgUri = "https://via.placeholder.com/600x400",
                             Name = "Test 3",
@@ -137,7 +173,7 @@ namespace API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("6198a31e-fed9-41cb-843b-75a15df3abb2"),
+                            Id = new Guid("225c7e01-738b-47ef-a5b7-d376f723d014"),
                             Description = "Test 4 Test 4 Test",
                             ImgUri = "https://via.placeholder.com/600x400",
                             Name = "Test 4",
@@ -145,7 +181,7 @@ namespace API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("a87c9c24-4100-4460-bea3-5479c9de7366"),
+                            Id = new Guid("057bf4b4-40b4-441f-9dec-558269f4fe33"),
                             Description = "Test 5 Test 5 Test",
                             ImgUri = "https://via.placeholder.com/600x400",
                             Name = "Test 5",
@@ -153,7 +189,7 @@ namespace API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("c044ebfa-c63b-4cad-a206-99414354d547"),
+                            Id = new Guid("389d24f4-a45a-479e-bfd7-34672ab2a85d"),
                             Description = "Test 6 Test 6 Test",
                             ImgUri = "https://via.placeholder.com/600x400",
                             Name = "Test 6",
@@ -161,7 +197,7 @@ namespace API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("8d60f1d1-54b2-4d20-b7b7-2333d05e985b"),
+                            Id = new Guid("1897cd44-535c-4703-b961-8bdbe6a8fbff"),
                             Description = "Test 7 Test 7 Test",
                             ImgUri = "https://via.placeholder.com/600x400",
                             Name = "Test 7",
@@ -169,7 +205,7 @@ namespace API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("3eb26bc1-bb62-4f8b-b121-75132d547a4f"),
+                            Id = new Guid("dec695c2-3a88-4580-bf71-f638060806a5"),
                             Description = "Test 8 Test 8 Test",
                             ImgUri = "https://via.placeholder.com/600x400",
                             Name = "Test 8",
@@ -177,7 +213,7 @@ namespace API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("81a3aa6d-8069-4149-80aa-3d0bd4bd6dcb"),
+                            Id = new Guid("d79340a6-c49c-4ec8-a955-0150b9a600d9"),
                             Description = "Test 9 Test 9 Test",
                             ImgUri = "https://via.placeholder.com/600x400",
                             Name = "Test 9",
@@ -185,7 +221,7 @@ namespace API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("0f41234e-16f3-41b3-a33e-c1725df153e3"),
+                            Id = new Guid("36e44bba-6c3f-4ca1-bb37-7085ca2e60c4"),
                             Description = "Test 10 Test 10 Test",
                             ImgUri = "https://via.placeholder.com/600x400",
                             Name = "Test 10",
@@ -193,7 +229,7 @@ namespace API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("b44a221e-d4af-4080-83a2-d02e79688852"),
+                            Id = new Guid("6b7b5494-9e87-47ce-b7e4-c5a0f319231d"),
                             Description = "Test 11 Test 11 Test",
                             ImgUri = "https://via.placeholder.com/600x400",
                             Name = "Test 11",
@@ -231,7 +267,7 @@ namespace API.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("1b2a1dfc-22b1-4029-8229-6833d63c3c71"),
+                            Id = new Guid("4a2c979e-26cd-48aa-82d3-f6ecb9311ee1"),
                             ConcurrencyStamp = "",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
@@ -341,6 +377,15 @@ namespace API.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("API.Models.Product", b =>
+                {
+                    b.HasOne("API.Models.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId");
+
+                    b.Navigation("Category");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
