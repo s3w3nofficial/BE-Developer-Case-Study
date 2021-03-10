@@ -68,8 +68,10 @@ namespace API.Controllers
         /// <param name="id"></param>
         /// <param name="categoryDto"></param>
         /// <response code="204">Returns when successfully updated</response>
+        /// <response code="403">If user is not loged in or is not in admin role</response>
         /// <response code="404">If category does not exist</response>
         [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [Authorize(Roles = "Admin")]
         [HttpPut("{id}")]
@@ -102,8 +104,10 @@ namespace API.Controllers
         /// <param name="categoryDto"></param>
         /// <returns>Created Category as ProductDto</returns>
         /// <response code="201">Returns when successfully created</response>
+        /// <response code="403">If user is not loged in or is not in admin role</response>
         /// <response code="400">If not all parameters are provided</response>
         [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [Authorize(Roles = "Admin")]
         [HttpPost]
@@ -116,7 +120,7 @@ namespace API.Controllers
 
             var category = await this._categoryRepository.CreateCategoryAsync(newCategory);
 
-            return Created("", category);
+            return Created("", category.AsDto());
         }
 
         /// <summary>
@@ -124,8 +128,10 @@ namespace API.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <response code="204">Returns when successfully deleted</response>
+        /// <response code="403">If user is not loged in or is not in admin role</response>
         /// <response code="404">If category does not exist</response>
         [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]

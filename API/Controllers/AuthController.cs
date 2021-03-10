@@ -2,6 +2,7 @@
 using API.Errors;
 using API.Models;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -37,6 +38,15 @@ namespace API.Controllers
 
         public IConfiguration Configuration { get; }
 
+        /// <summary>
+        /// Retrieves jwt token
+        /// </summary>
+        /// <param name="loginDto"></param>
+        /// <returns>Token</returns>
+        /// <response code="200">Returns when successfully logged in</response>
+        /// <response code="403">If user does not exist or provided incorect password</response>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginDto loginDto)
         {
@@ -72,6 +82,15 @@ namespace API.Controllers
             return Unauthorized();
         }
 
+        /// <summary>
+        /// Retrieves jwt token and creates new user
+        /// </summary>
+        /// <param name="registerDto"></param>
+        /// <returns>Token</returns>
+        /// <response code="200">Returns when successfully registered</response>
+        /// <response code="400">If user exists</response>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterDto registerDto)
         {

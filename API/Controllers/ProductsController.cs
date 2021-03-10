@@ -103,8 +103,10 @@ namespace API.Controllers
         /// <param name="query"></param>
         /// <param name="description"></param>
         /// <response code="204">Returns when successfully updated</response>
+        /// <response code="403">If user is not loged in or is not in admin role</response>
         /// <response code="404">If product does not exist</response>
         [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [Authorize(Roles = "Admin")]
         [HttpPut("{query}/description")]
@@ -142,8 +144,10 @@ namespace API.Controllers
         /// <param name="query"></param>
         /// <param name="productDto"></param>
         /// <response code="204">Returns when successfully updated</response>
+        /// <response code="403">If user is not loged in or is not in admin role</response>
         /// <response code="404">If product does not exist</response>
         [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [Authorize(Roles = "Admin")]
         [HttpPut("{query}")]
@@ -184,8 +188,10 @@ namespace API.Controllers
         /// <param name="productDto"></param>
         /// <returns>Created Product as ProductDto</returns>
         /// <response code="201">Returns when successfully created</response>
+        /// <response code="403">If user is not loged in or is not in admin role</response>
         /// <response code="400">If not all parameters are provided</response>
         [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [Authorize(Roles = "Admin")]
         [HttpPost]
@@ -209,8 +215,10 @@ namespace API.Controllers
         /// </summary>
         /// <param name="query"></param>
         /// <response code="204">Returns when successfully deleted</response>
+        /// <response code="403">If user is not loged in or is not in admin role</response>
         /// <response code="404">If product does not exist</response>
         [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [Authorize(Roles = "Admin")]
         [HttpDelete("{query}")]

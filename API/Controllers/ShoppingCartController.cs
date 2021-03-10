@@ -35,7 +35,9 @@ namespace API.Controllers
         /// </summary>
         /// <returns>ShoppingCartDto</returns>
         /// <response code="200">Returns ShoppingCartDto</response>
+        /// <response code="204">If user is not logged in</response>
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [HttpGet]
         public ActionResult<ShoppingCartDto> GetAll()
         {
@@ -53,8 +55,10 @@ namespace API.Controllers
         /// </summary>
         /// <param name="query"></param>
         /// <response code="204">Returns when successfully created</response>
+        /// <response code="204">If user is not logged in</response>
         /// <response code="400">If not all parameters are provided</response>
         [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [HttpPost("{query}")]
         public async Task<IActionResult> AddProductToShoppingCart(string query)
@@ -85,8 +89,10 @@ namespace API.Controllers
         /// </summary>
         /// <param name="query"></param>
         /// <response code="204">Returns when successfully deleted</response>
+        /// <response code="204">If user is not logged in</response>
         /// <response code="404">If Product does not exist</response>
         [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [HttpDelete("{query}")]
         public async Task<IActionResult> RemoveProductFromShoppingCart(string query)
