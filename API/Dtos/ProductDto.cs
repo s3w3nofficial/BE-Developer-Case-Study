@@ -20,6 +20,6 @@ namespace API.Dtos
         public decimal Price { get; init; }
         public string Description { get; init; } = "";
         public string Slug { get => SlugService.Slugify(this); }
-        public Category Category { get; set; }
+        public CategoryDto Category { get; set; }
     }
 }
