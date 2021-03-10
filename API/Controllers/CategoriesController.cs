@@ -28,6 +28,7 @@ namespace API.Controllers
         /// <summary>
         /// Retrieves all CategoryDtos
         /// </summary>
+        /// <returns>list of CategoryDtos</returns>
         /// <response code="200">Returns list of CategoryDtos</response>
         [HttpGet]
         public async Task<ActionResult<IEnumerable<CategoryDto>>> GetAllAsync()

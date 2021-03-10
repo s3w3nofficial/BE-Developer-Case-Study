@@ -4,6 +4,7 @@ using API.Extensions;
 using API.Models;
 using API.Services;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -29,6 +30,12 @@ namespace API.Controllers
             this._productRepository = productRepository;
         }
 
+        /// <summary>
+        /// Retrieves ShoppingCartDto which contains list of Products
+        /// </summary>
+        /// <returns>ShoppingCartDto</returns>
+        /// <response code="200">Returns ShoppingCartDto</response>
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [HttpGet]
         public ActionResult<ShoppingCartDto> GetAll()
         {
@@ -41,6 +48,14 @@ namespace API.Controllers
             });
         }
 
+        /// <summary>
+        /// Adds Product to shopping cart
+        /// </summary>
+        /// <param name="query"></param>
+        /// <response code="204">Returns when successfully created</response>
+        /// <response code="400">If not all parameters are provided</response>
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [HttpPost("{query}")]
         public async Task<IActionResult> AddProductToShoppingCart(string query)
         {
@@ -65,6 +80,14 @@ namespace API.Controllers
             return NoContent();
         }
 
+        /// <summary>
+        /// Removes Product from shopping cart
+        /// </summary>
+        /// <param name="query"></param>
+        /// <response code="204">Returns when successfully deleted</response>
+        /// <response code="404">If Product does not exist</response>
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [HttpDelete("{query}")]
         public async Task<IActionResult> RemoveProductFromShoppingCart(string query)
         {
