@@ -27,6 +27,7 @@ namespace API.Services
             => this._db.Products
                 .Include(p => p.Category)
                 .AsNoTracking()
+                .ToList()
                 .OrderBy(p => p.Id)
                 .FirstOrDefault(p => SlugService.Slugify(p) == slug);
 
