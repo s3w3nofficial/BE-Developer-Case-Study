@@ -26,6 +26,7 @@ namespace API.Services
         {
             var user = this._db.Users
                 .Include(u => u.Products)
+                .OrderBy(p => p.Id)
                 .FirstOrDefault(u => u.UserName == username);
             user.Products.Add(product);
 
@@ -37,6 +38,7 @@ namespace API.Services
         {
             var user = this._db.Users
                 .Include(u => u.Products)
+                .OrderBy(p => p.Id)
                 .FirstOrDefault(u => u.UserName == username);
             user.Products.Remove(product);
 

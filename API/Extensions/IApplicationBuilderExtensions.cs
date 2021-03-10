@@ -19,12 +19,12 @@ namespace API.Extensions
             db.Database.Migrate();
 
             // add category to first product
-            var prodcut = db.Products.AsNoTracking().FirstOrDefault();
+            var prodcut = db.Products.AsNoTracking().OrderBy(p => p.Id).FirstOrDefault();
             if (prodcut != null && prodcut.Category == null)
             {
                 var updatedProduct = prodcut with
                 {
-                    Category = db.Categories.FirstOrDefault()
+                    Category = db.Categories.OrderBy(c => c.Id).FirstOrDefault()
                 };
                 db.Products.Update(updatedProduct);
                 db.SaveChanges();

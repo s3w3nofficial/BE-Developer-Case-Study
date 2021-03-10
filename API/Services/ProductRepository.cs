@@ -20,12 +20,14 @@ namespace API.Services
             => this._db.Products
                 .Include(p => p.Category)
                 .AsNoTracking()
+                .OrderBy(p => p.Id)
                 .FirstOrDefault(p => p.Id == id);
 
         public Product GetProduct(string slug)
             => this._db.Products
                 .Include(p => p.Category)
                 .AsNoTracking()
+                .OrderBy(p => p.Id)
                 .FirstOrDefault(p => SlugService.Slugify(p) == slug);
 
         public async Task<List<Product>> GetProductsAsync(int pageSize = 10, int pageNumber = 0)

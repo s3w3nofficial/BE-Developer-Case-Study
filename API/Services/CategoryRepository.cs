@@ -16,7 +16,7 @@ namespace API.Services
         }
 
         public Category GetCategory(Guid id)
-            => this._db.Categories.FirstOrDefault(c => c.Id == id);
+            => this._db.Categories.OrderBy(c => c.Id).FirstOrDefault(c => c.Id == id);
 
         public async Task<IEnumerable<Category>> GetCategoriesAsync()
             => await this._db.Categories
