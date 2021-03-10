@@ -70,7 +70,7 @@ namespace API
                     ValidAudiences = new List<string>
                     {
                         "https://localhost:5001",
-                        "http://localhost:5900"
+                        "http://localhost:5900",
                     },
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration.GetSection("JwtSecret").Value))
                 };

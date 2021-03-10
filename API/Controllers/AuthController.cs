@@ -68,8 +68,8 @@ namespace API.Controllers
                 }
 
                 var tokenOptions = new JwtSecurityToken(
-                    issuer: this._currentEnvironment.IsDevelopment() ? "https://localhost:5001" : "https://localhost:5900",
-                    audience: this._currentEnvironment.IsDevelopment() ? "https://localhost:5001" : "https://localhost:5900",
+                    issuer: this._currentEnvironment.IsDevelopment() ? "https://localhost:5001" : "http://localhost:5900",
+                    audience: this._currentEnvironment.IsDevelopment() ? "https://localhost:5001" : "http://localhost:5900",
                     claims: claims,
                     expires: DateTime.Now.AddMinutes(5),
                     signingCredentials: signInCredentials);
@@ -112,8 +112,8 @@ namespace API.Controllers
             var signInCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
 
             var tokenOptions = new JwtSecurityToken(
-                issuer: this._currentEnvironment.IsDevelopment() ? "https://localhost:5001" : "https://localhost:5900",
-                audience: this._currentEnvironment.IsDevelopment() ? "https://localhost:5001" : "https://localhost:5900",
+                issuer: this._currentEnvironment.IsDevelopment() ? "https://localhost:5001" : "http://localhost:5900",
+                audience: this._currentEnvironment.IsDevelopment() ? "https://localhost:5001" : "http://localhost:5900",
                 claims: new List<Claim>() 
                 {
                     new Claim(ClaimTypes.Name, registerDto.UserName)
