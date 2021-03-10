@@ -9,14 +9,14 @@ namespace API.Models
     {
         [Key]
         [Required]
-        public Guid Id { get; init; }
+        public Guid Id { get; set; }
         [Required]
-        public string Name { get; init; }
+        public string Name { get; set; }
         [Required]
-        public string ImgUri { get; init; }
+        public string ImgUri { get; set; }
         [Required]
-        public decimal Price { get; init; }
-        public string Description { get; init; } = "";
-        public Category Category { get; init; }
+        public decimal Price { get; set; }
+        public string Description { get; set; } = "";
+        public Category Category { get; set; }
     }
 }
