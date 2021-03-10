@@ -17,7 +17,7 @@ namespace API.Extensions
                 ImgUri = product.ImgUri,
                 Price = product.Price,
                 Description = product.Description,
-                Category = product.Category.AsDto(),
+                Category = product.Category?.AsDto(),
             };
 
         public static CategoryDto AsDto(this Category category)
