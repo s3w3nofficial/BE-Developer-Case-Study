@@ -14,6 +14,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.Filters;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -52,7 +53,8 @@ namespace API
             {
                 opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            })
+            });
+                /*
             .AddJwtBearer(options =>
             {
                 options.TokenValidationParameters = new TokenValidationParameters
@@ -75,6 +77,7 @@ namespace API
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration.GetSection("JwtSecret").Value))
                 };
             });
+                */
 
             services.AddControllers();
 
@@ -84,7 +87,8 @@ namespace API
             });
 
             services.AddDbContext<ApplicationDbContext>(
-                options => options.UseSqlServer(Configuration.GetConnectionString("SqlServer")));
+                //options => options.UseSqlServer(Configuration.GetConnectionString("SqlServer")));
+                options => options.UseInMemoryDatabase("mock"));
 
             services.AddDefaultIdentity<ApplicationUser>(config => config.SignIn.RequireConfirmedEmail = false)
                 .AddRoles<IdentityRole<Guid>>()
@@ -94,6 +98,21 @@ namespace API
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "BE Developer Case Study API", Version = "v1" });
                 c.SwaggerDoc("v2", new OpenApiInfo { Title = "BE Developer Case Study API V2", Version = "v2" });
+
+                /*
+                // Enable Swagger examples
+                c.OperationFilter<ExamplesOperationFilter>();
+
+                // Enable swagger descriptions
+                c.OperationFilter<DescriptionOperationFilter>();
+
+                // Enable swagger response headers
+                c.OperationFilter<AddResponseHeadersFilter>();
+
+                // Add (Auth) to action summary
+                c.OperationFilter<AppendAuthorizeToSummaryOperationFilter>();
+                */
+
                 c.AddSecurityDefinition("jwt_auth", new OpenApiSecurityScheme
                 {
                     Name = "Bearer",
@@ -123,6 +142,8 @@ namespace API
                 c.IncludeXmlComments(xmlPath);
             });
 
+            services.AddSwaggerExamplesFromAssemblies(Assembly.GetEntryAssembly());
+
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<IShoppingCartRepository, ShoppingCartRepository>();
@@ -148,7 +169,7 @@ namespace API
             }
 
             // seed users and apply migrations
-            app.Seed(db, userManager);
+            //app.Seed(db, userManager);
 
             app.UseSwagger();
             app.UseSwaggerUI(c =>

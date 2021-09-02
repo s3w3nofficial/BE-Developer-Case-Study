@@ -10,6 +10,8 @@ using System.Threading.Tasks;
 using API.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Authorization;
+using API.Examples;
+using Swashbuckle.AspNetCore.Filters;
 
 namespace API.Controllers
 {
@@ -30,6 +32,7 @@ namespace API.Controllers
         /// </summary>
         /// <response code="200">Returns list of ProductDtos</response>
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [SwaggerRequestExample(typeof(IEnumerable<ProductDto>), typeof(IEnumerable<ProductDtoExample>))]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ProductDto>>> GetAllAsync()
         {
